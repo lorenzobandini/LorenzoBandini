@@ -1,5 +1,5 @@
 # 💫 About Me:
-👋 Hi, I’m Lorenzo Bandini but you can call me "Bando"<br>👀 I'm interested in discovering more and more programming languages<br>🌱 I’m currently learning C and Java<br>💞️ I’m looking to collaborate on something to improve myself<br>📫 How to reach me: bandinilorenzo02@gmail.com
+👋 Hi, I’m Lorenzo Bandini but you can call me "Bando"<br>👀 I'm interested in discovering more and more programming languages<br>🌱 I’m currently learning C and Java<br>💞️ I’m looking to collaborate on something to improve myself<br>📫 How to reach me: bandinilorenzo02 [at] gmail [dot] com
 
 
 ## 🌐 Socials:
