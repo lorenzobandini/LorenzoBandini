@@ -45,11 +45,7 @@ text, tspan {white-space: pre;}
 <tspan x="370" y="70" class="keyColor">OS</tspan>: <tspan class="valueColor">Windows 11, Arch Linux, Android</tspan>
 <tspan x="370" y="90" class="keyColor">Uptime</tspan>: <tspan class="valueColor">22 years, 5 months, 19 days</tspan>
 <tspan x="370" y="110" class="keyColor">Host</tspan>: <tspan class="valueColor">University of Pisa</tspan><tspan class="commentColor"> #UniPi</tspan>
-<<<<<<< HEAD
 <tspan x="370" y="130" class="keyColor">Kernel</tspan>: <tspan class="valueColor">MSc in Computer Science</tspan><tspan class="commentColor"> #CS</tspan>
-=======
-<tspan x="370" y="130" class="keyColor">Kernel</tspan>: <tspan class="valueColor">&gt;MSc in Computer Science</tspan><tspan class="commentColor"> #CPET</tspan>
->>>>>>> 3d19c4381490854ffb671a88ff5b342d6dd5008c
 <tspan x="370" y="150" class="keyColor">IDE</tspan>: <tspan class="valueColor">VSCode 1.96.2</tspan>
 <tspan x="370" y="190" class="keyColor">Languages</tspan>.<tspan class="keyColor">Programming</tspan>: <tspan class="valueColor">Java, C, Python, OCaml, JavaScript</tspan>
 <tspan x="370" y="210" class="keyColor">Languages</tspan>.<tspan class="keyColor">Computer</tspan>: <tspan class="valueColor">HTML, CSS, JSON, XML, LaTeX, YAML, Markdown</tspan>
