@@ -292,8 +292,14 @@ def add_archive():
         added_loc += int(loc[0])
         deleted_loc += int(loc[1])
         if (my_commits.isdigit()): added_commits += int(my_commits)
-    added_commits += int(old_data[-1].split()[4][:-1])
+    # Modifica per evitare IndexError
+    if len(old_data[-1].split()) > 4:
+        added_commits += int(old_data[-1].split()[4][:-1])
+    else:
+        # Gestione del caso in cui mancano elementi
+        added_commits += 0  # oppure altra logica appropriata
     return [added_loc, deleted_loc, added_loc - deleted_loc, added_commits, contributed_repos]
+
 
 def force_close_file(data, cache_comment):
     """
