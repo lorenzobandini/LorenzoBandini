@@ -220,8 +220,8 @@ def cache_builder(edges, comment_size, force_cache, loc_add=0, loc_del=0):
     Checks each repository in edges to see if it has been updated since the last time it was cached
     If it has, run recursive_loc on that repository to update the LOC count
     """
-    cached = True # Assume all repositories are cached
-    filename = 'cache/'+hashlib.sha256(USER_NAME.encode('utf-8')).hexdigest()+'.txt' # Create a unique filename for each user
+    cached = True
+    filename = os.path.join('cache', hashlib.sha256(USER_NAME.encode('utf-8')).hexdigest()+'.txt') # Modificato il percorso
     try:
         with open(filename, 'r') as f:
             data = f.readlines()
@@ -436,6 +436,7 @@ if __name__ == '__main__':
     """
     Lorenzo Bandini (lorenzobandini), 2024-2025
     """
+    os.makedirs('cache', exist_ok=True)  # Crea la directory cache se non esiste
     print('Calculation times:')
     # define global variable for owner ID and calculate user's creation date
     # e.g {'id': 'MDQ6VXNlcjU3MzMxMTM0'} and 2019-11-03T21:15:07Z for username 'lorenzobandini'
