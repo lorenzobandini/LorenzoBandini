@@ -49,7 +49,7 @@ text, tspan {white-space: pre;}
 <tspan x="370" y="190" class="keyColor">Languages</tspan>.<tspan class="keyColor">Programming</tspan>: <tspan class="valueColor">Java, C, Python, OCaml, JavaScript</tspan>
 <tspan x="370" y="210" class="keyColor">Languages</tspan>.<tspan class="keyColor">Computer</tspan>: <tspan class="valueColor">HTML, CSS, JSON, XML, LaTeX, YAML, Markdown</tspan>
 <tspan x="370" y="230" class="keyColor">Languages</tspan>.<tspan class="keyColor">Real</tspan>: <tspan class="valueColor">Italian, English</tspan>
-<tspan x="370" y="270" class="keyColor">Hobbies</tspan>.<tspan class="keyColor">Software</tspan>: <tspan class="valueColor">Linux Distro Ricing, Distributed Systems Programming</tspan>
+<tspan x="370" y="270" class="keyColor">Hobbies</tspan>.<tspan class="keyColor">Software</tspan>: <tspan class="valueColor">Linux Distro Ricing, Distributed Systems</tspan>
 <tspan x="370" y="290" class="keyColor">Hobbies</tspan>.<tspan class="keyColor">Hardware</tspan>: <tspan class="valueColor">PC Assembly, Hardware Modding</tspan>
 <tspan x="370" y="330" class="keyColor">Contact</tspan>:
 <tspan x="370" y="350">——————</tspan>
@@ -58,7 +58,7 @@ text, tspan {white-space: pre;}
 <tspan x="370" y="410" class="keyColor">Discord</tspan>: <tspan class="valueColor">lorenzobandini</tspan>
 <tspan x="370" y="450" class="keyColor">GitHub Stats</tspan>:
 <tspan x="370" y="490" class="keyColor">Repos</tspan>:<tspan class="valueColor">769    </tspan> {<tspan class="keyColor">Contributed</tspan>: <tspan class="valueColor">6</tspan>}  | <tspan class="keyColor">Commmits</tspan>: <tspan class="valueColor">19  </tspan>| <tspan class="keyColor">Stars</tspan>: <tspan class="valueColor">395,054</tspan>
-<tspan x="370" y="510" class="keyColor">434,181++</tspan>: <tspan class="valueColor">39,127--</tspan>| <tspan class="keyColor">Lines of Code</tspan>: <tspan class="valueColor">446,123</tspan> (<tspan class="addColor">522,827++</tspan>, <tspan class="delColor">76,704--</tspan>)
+<tspan x="370" y="510" class="keyColor">Followers</tspan>: <tspan class="valueColor">39,127--</tspan>| <tspan class="keyColor">Lines of Code</tspan>: <tspan class="valueColor">446,123</tspan> (<tspan class="addColor">522,827++</tspan>, <tspan class="delColor">76,704--</tspan>)
 </text>
 
 </svg>
