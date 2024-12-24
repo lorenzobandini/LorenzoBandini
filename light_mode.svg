@@ -44,7 +44,6 @@ text, tspan {white-space: pre;}
 
 <text x="370" y="30" fill="#24292f">
 <tspan x="370" y="30">lorenzo@grant</tspan>
-<tspan x="370" y="50">22 years, 3 months, 2 days</tspan>
 <tspan x="370" y="70" class="keyColor">OS</tspan>: <tspan class="valueColor">Windows 11, Arch Linux, Android</tspan>
 <tspan x="370" y="90" class="keyColor">22 years, 3 months, 2 days</tspan>: <tspan class="valueColor">22 years, 5 months, 19 days</tspan>
 <tspan x="370" y="110" class="keyColor">Host</tspan>: <tspan class="valueColor">University of Pisa</tspan><tspan class="commentColor"> #UniPi</tspan>
@@ -61,7 +60,6 @@ text, tspan {white-space: pre;}
 <tspan x="370" y="390" class="keyColor">LinkedIn</tspan>: <tspan class="valueColor">lorenzobandinii</tspan>
 <tspan x="370" y="410" class="keyColor">Discord</tspan>: <tspan class="valueColor">21</tspan>
 <tspan x="370" y="450" class="keyColor">GitHub Stats</tspan>:
-<tspan x="370" y="470">26</tspan>
 <tspan x="370" y="490" class="keyColor">21</tspan>: <tspan class="valueColor">769    </tspan> {<tspan class="keyColor">26</tspan>: <tspan class="valueColor">6</tspan>}  | <tspan class="keyColor">774    </tspan>: <tspan class="valueColor">19  </tspan>| <tspan class="keyColor">6</tspan>: <tspan class="valueColor">395,054</tspan>
 <tspan x="370" y="510" class="keyColor">19  </tspan>: <tspan class="valueColor">39,127--</tspan>| <tspan class="keyColor">395,095</tspan>: <tspan class="valueColor">434,308++</tspan> (<tspan class="addColor">39,213--</tspan>, <tspan class="delColor">76,704--</tspan>)
 </text>
