@@ -44,11 +44,15 @@ text, tspan {white-space: pre;}
 
 <text x="370" y="30" fill="#c9d1d9">
 <tspan x="370" y="30">lorenzo@bandini</tspan>
-<tspan x="370" y="50">——————</tspan>
+<tspan x="370" y="50">22 years, 3 months, 2 days</tspan>
 <tspan x="370" y="70" class="keyColor">OS</tspan>: <tspan class="valueColor">Windows 11, Arch Linux, Android</tspan>
 <tspan x="370" y="90" class="keyColor">Uptime</tspan>: <tspan class="valueColor">22 years, 5 months, 19 days</tspan>
 <tspan x="370" y="110" class="keyColor">Host</tspan>: <tspan class="valueColor">University of Pisa</tspan><tspan class="commentColor"> #UniPi</tspan>
+<<<<<<< HEAD
 <tspan x="370" y="130" class="keyColor">Kernel</tspan>: <tspan class="valueColor">MSc in Computer Science</tspan><tspan class="commentColor"> #CS</tspan>
+=======
+<tspan x="370" y="130" class="keyColor">Kernel</tspan>: <tspan class="valueColor">&gt;MSc in Computer Science</tspan><tspan class="commentColor"> #CPET</tspan>
+>>>>>>> 3d19c4381490854ffb671a88ff5b342d6dd5008c
 <tspan x="370" y="150" class="keyColor">IDE</tspan>: <tspan class="valueColor">VSCode 1.96.2</tspan>
 <tspan x="370" y="190" class="keyColor">Languages</tspan>.<tspan class="keyColor">Programming</tspan>: <tspan class="valueColor">Java, C, Python, OCaml, JavaScript</tspan>
 <tspan x="370" y="210" class="keyColor">Languages</tspan>.<tspan class="keyColor">Computer</tspan>: <tspan class="valueColor">HTML, CSS, JSON, XML, LaTeX, YAML, Markdown</tspan>
@@ -59,11 +63,11 @@ text, tspan {white-space: pre;}
 <tspan x="370" y="350">——————</tspan>
 <tspan x="370" y="370" class="keyColor">Email</tspan>: <tspan class="valueColor">lboa@hotmail.it</tspan>
 <tspan x="370" y="390" class="keyColor">LinkedIn</tspan>: <tspan class="valueColor">lorenzobandinii</tspan>
-<tspan x="370" y="410" class="keyColor">Discord</tspan>: <tspan class="valueColor">lorenzobandini</tspan>
+<tspan x="370" y="410" class="keyColor">Discord</tspan>: <tspan class="valueColor">21</tspan>
 <tspan x="370" y="450" class="keyColor">GitHub Stats</tspan>:
-<tspan x="370" y="470">——————</tspan>
-<tspan x="370" y="490" class="keyColor">Repos</tspan>: <tspan class="valueColor">95</tspan> {<tspan class="keyColor">Contributed</tspan>: <tspan class="valueColor">133</tspan>}  | <tspan class="keyColor">Commmits</tspan>: <tspan class="valueColor">2,107  </tspan>| <tspan class="keyColor">Stars</tspan>: <tspan class="valueColor">299</tspan>
-<tspan x="370" y="510" class="keyColor">Followers</tspan>: <tspan class="valueColor">161 </tspan>| <tspan class="keyColor">Lines of Code</tspan>: <tspan class="valueColor">446,123</tspan> (<tspan class="addColor">522,827++</tspan>, <tspan class="delColor">76,704--</tspan>)
+<tspan x="370" y="470">26</tspan>
+<tspan x="370" y="490" class="keyColor">Repos</tspan>: <tspan class="valueColor">769    </tspan> {<tspan class="keyColor">Contributed</tspan>: <tspan class="valueColor">6</tspan>}  | <tspan class="keyColor">Commmits</tspan>: <tspan class="valueColor">19  </tspan>| <tspan class="keyColor">Stars</tspan>: <tspan class="valueColor">395,054</tspan>
+<tspan x="370" y="510" class="keyColor">434,181++</tspan>: <tspan class="valueColor">39,127--</tspan>| <tspan class="keyColor">Lines of Code</tspan>: <tspan class="valueColor">446,123</tspan> (<tspan class="addColor">522,827++</tspan>, <tspan class="delColor">76,704--</tspan>)
 </text>
 
 </svg>
