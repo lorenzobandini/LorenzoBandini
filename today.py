@@ -5,6 +5,7 @@ import os
 from xml.dom import minidom
 import time
 import hashlib
+import xml  # Aggiunto import per risolvere NameError
 
 # Fine-grained personal access token with All Repositories access:
 # Account permissions: read:Followers, read:Starring, read:Watching
@@ -485,4 +486,5 @@ if __name__ == '__main__':
         ' s \033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E', sep='')
 
     print('Total GitHub GraphQL API calls:', '{:>3}'.format(sum(QUERY_COUNT.values())))
+    for funct_name, count in QUERY_COUNT.items(): print('{:<28}'.format('   ' + funct_name + ':'), '{:>6}'.format(count))
     for funct_name, count in QUERY_COUNT.items(): print('{:<28}'.format('   ' + funct_name + ':'), '{:>6}'.format(count))
