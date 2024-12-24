@@ -5,11 +5,10 @@ import os
 from xml.dom import minidom
 import time
 import hashlib
-import xml  # Aggiunto import per risolvere NameError
 
 # Fine-grained personal access token with All Repositories access:
 # Account permissions: read:Followers, read:Starring, read:Watching
-# Repository permissionsd:Commit: rea statuses, read:Contents, read:Issues, read:Metadata, read:Pull Requests
+# Repository permissions: read:Commit statuses, read:Contents, read:Issues, read:Metadata, read:Pull Requests
 # Issues and pull requests permissions not needed at the moment, but may be used in the future
 HEADERS = {'authorization': 'token '+ os.environ['ACCESS_TOKEN']}
 USER_NAME = os.environ['USER_NAME'] # 'lorenzobandini'
@@ -221,8 +220,8 @@ def cache_builder(edges, comment_size, force_cache, loc_add=0, loc_del=0):
     Checks each repository in edges to see if it has been updated since the last time it was cached
     If it has, run recursive_loc on that repository to update the LOC count
     """
-    cached = True
-    filename = os.path.join('cache', hashlib.sha256(USER_NAME.encode('utf-8')).hexdigest()+'.txt') # Modificato il percorso
+    cached = True # Assume all repositories are cached
+    filename = 'cache/'+hashlib.sha256(USER_NAME.encode('utf-8')).hexdigest()+'.txt' # Create a unique filename for each user
     try:
         with open(filename, 'r') as f:
             data = f.readlines()
@@ -285,8 +284,6 @@ def add_archive():
     with open('cache/repository_archive.txt', 'r') as f:
         data = f.readlines()
     old_data = data
-    if len(old_data) < 1:
-        return [0, 0, 0, 0, 0]  # Gestione caso vuoto
     data = data[7:len(data)-3] # remove the comment block    
     added_loc, deleted_loc, added_commits = 0, 0, 0
     contributed_repos = len(data)
@@ -295,14 +292,16 @@ def add_archive():
         added_loc += int(loc[0])
         deleted_loc += int(loc[1])
         if (my_commits.isdigit()): added_commits += int(my_commits)
-    # Modifica per evitare IndexError
-    if len(old_data[-1].split()) > 4:
+        added_commits += int(old_data[-1].split()[4][:-1])
         added_commits += int(old_data[-1].split()[4][:-1])
     else:
         # Gestione del caso in cui mancano elementi
         added_commits += 0  # oppure altra logica appropriata
+    added_commits += int(old_data[-1].split()[4][:-1])
+    else:
+        # Gestione del caso in cui mancano elementi
+        added_commits += 0  # oppure altra logica appropriata
     return [added_loc, deleted_loc, added_loc - deleted_loc, added_commits, contributed_repos]
-
 
 def force_close_file(data, cache_comment):
     """
@@ -329,27 +328,20 @@ def svg_overwrite(filename, age_data, commit_data, star_data, repo_data, contrib
     """
     Parse SVG files and update elements with my age, commits, stars, repositories, and lines written
     """
-    try:
-        svg = minidom.parse(filename)
-    except xml.parsers.expat.ExpatError as e:
-        print(f"Errore nel parsing del file SVG: {e}")
-        return
+    svg = minidom.parse(filename)
+    f = open(filename, mode='w', encoding='utf-8')
     tspan = svg.getElementsByTagName('tspan')
-    try:
-        tspan[30].firstChild.data = age_data
-        tspan[65].firstChild.data = repo_data
-        tspan[67].firstChild.data = contrib_data
-        tspan[69].firstChild.data = commit_data
-        tspan[71].firstChild.data = star_data
-        tspan[73].firstChild.data = follower_data
-        tspan[75].firstChild.data = loc_data[2]
-        tspan[76].firstChild.data = loc_data[0] + '++'
-        tspan[77].firstChild.data = loc_data[1] + '--'
-    except IndexError as e:
-        print(f"Indice tspan non valido: {e}")
-        return
-    with open(filename, mode='w', encoding='utf-8') as f:
-        f.write(svg.toxml('utf-8').decode('utf-8'))
+    tspan[30].firstChild.data = age_data
+    tspan[65].firstChild.data = repo_data
+    tspan[67].firstChild.data = contrib_data
+    tspan[69].firstChild.data = commit_data
+    tspan[71].firstChild.data = star_data
+    tspan[73].firstChild.data = follower_data
+    tspan[75].firstChild.data = loc_data[2]
+    tspan[76].firstChild.data = loc_data[0] + '++'
+    tspan[77].firstChild.data = loc_data[1] + '--'
+    f.write(svg.toxml('utf-8').decode('utf-8'))
+    f.close()
 
 
 def commit_counter(comment_size):
@@ -444,10 +436,9 @@ if __name__ == '__main__':
     """
     Lorenzo Bandini (lorenzobandini), 2024-2025
     """
-    os.makedirs('cache', exist_ok=True)  # Crea la directory cache se non esiste
     print('Calculation times:')
     # define global variable for owner ID and calculate user's creation date
-    # e.g {'id': 'MDQ6VXNlcjU3MzMxMTM0'} and 2019-11-03T21:15:07Z for username 'lorenzobandini'
+    # e.g {'id': 'MDQ6VXNlcjkwMzk2OTgx'} and 2019-11-03T21:15:07Z for username 'lorenzobandini'
     user_data, user_time = perf_counter(user_getter, USER_NAME)
     OWNER_ID, acc_date = user_data
     formatter('account data', user_time)
@@ -486,5 +477,4 @@ if __name__ == '__main__':
         ' s \033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E', sep='')
 
     print('Total GitHub GraphQL API calls:', '{:>3}'.format(sum(QUERY_COUNT.values())))
-    for funct_name, count in QUERY_COUNT.items(): print('{:<28}'.format('   ' + funct_name + ':'), '{:>6}'.format(count))
     for funct_name, count in QUERY_COUNT.items(): print('{:<28}'.format('   ' + funct_name + ':'), '{:>6}'.format(count))
