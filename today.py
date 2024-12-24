@@ -284,6 +284,8 @@ def add_archive():
     with open('cache/repository_archive.txt', 'r') as f:
         data = f.readlines()
     old_data = data
+    if len(old_data) < 1:
+        return [0, 0, 0, 0, 0]  # Gestione caso vuoto
     data = data[7:len(data)-3] # remove the comment block    
     added_loc, deleted_loc, added_commits = 0, 0, 0
     contributed_repos = len(data)
