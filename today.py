@@ -1,16 +1,17 @@
-import datetime
 from dateutil import relativedelta
-import requests
-import os
 from xml.dom import minidom
-import time
+import datetime
+import requests
 import hashlib
+import time
+import os
 
 # Fine-grained personal access token with All Repositories access:
 # Account permissions: read:Followers, read:Starring, read:Watching
 # Repository permissions: read:Commit statuses, read:Contents, read:Issues, read:Metadata, read:Pull Requests
 # Issues and pull requests permissions not needed at the moment, but may be used in the future
-HEADERS = {'authorization': 'token '+ os.environ['ACCESS_TOKEN']}
+ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
+HEADERS = {'authorization': 'token '+ ACCESS_TOKEN}
 USER_NAME = os.environ['USER_NAME'] # 'lorenzobandini'
 QUERY_COUNT = {'user_getter': 0, 'follower_getter': 0, 'graph_repos_stars': 0, 'recursive_loc': 0, 'graph_commits': 0, 'loc_query': 0}
 
@@ -22,8 +23,8 @@ def daily_readme(birthday):
     """
     diff = relativedelta.relativedelta(datetime.datetime.today(), birthday)
     return '{} {}, {} {}, {} {}{}'.format(
-        diff.years, 'year' + format_plural(diff.years), 
-        diff.months, 'month' + format_plural(diff.months), 
+        diff.years, 'year' + format_plural(diff.years),
+        diff.months, 'month' + format_plural(diff.months),
         diff.days, 'day' + format_plural(diff.days),
         ' 🎂' if (diff.months == 0 and diff.days == 0) else '')
 
@@ -157,7 +158,7 @@ def recursive_loc(owner, repo_name, data, cache_comment, addition_total=0, delet
 
 def loc_counter_one_repo(owner, repo_name, data, cache_comment, history, addition_total, deletion_total, my_commits):
     """
-    Recursively call recursive_loc (since GraphQL can only search 100 commits at a time) 
+    Recursively call recursive_loc (since GraphQL can only search 100 commits at a time)
     only adds the LOC value of commits authored by me
     """
     for node in history['edges']:
@@ -284,7 +285,7 @@ def add_archive():
     with open('cache/repository_archive.txt', 'r') as f:
         data = f.readlines()
     old_data = data
-    data = data[7:len(data)-3] # remove the comment block    
+    data = data[7:len(data)-3] # remove the comment block
     added_loc, deleted_loc, added_commits = 0, 0, 0
     contributed_repos = len(data)
     for line in data:
@@ -318,22 +319,47 @@ def stars_counter(data):
 
 def svg_overwrite(filename, age_data, commit_data, star_data, repo_data, contrib_data, follower_data, loc_data):
     """
-    Parse SVG files and update elements with my age, commits, stars, repositories, and lines written
+    Parse SVG files and update elements with age, commits, stars, repositories, and lines of code.
+
+    Parameters:
+        filename (str): The path to the SVG file.
+        age_data (str): The age data to insert.
+        commit_data (str): The number of commits.
+        star_data (str): The number of stars.
+        repo_data (str): The number of repositories.
+        contrib_data (str): The number of contributions.
+        follower_data (str): The number of followers.
+        loc_data (list): List containing lines of code (added, removed, total).
     """
     svg = minidom.parse(filename)
-    f = open(filename, mode='w', encoding='utf-8')
-    tspan = svg.getElementsByTagName('tspan')
-    tspan[30].firstChild.data = age_data
-    tspan[65].firstChild.data = repo_data
-    tspan[67].firstChild.data = contrib_data
-    tspan[69].firstChild.data = commit_data
-    tspan[71].firstChild.data = star_data
-    tspan[73].firstChild.data = follower_data
-    tspan[75].firstChild.data = loc_data[2]
-    tspan[76].firstChild.data = loc_data[0] + '++'
-    tspan[77].firstChild.data = loc_data[1] + '--'
-    f.write(svg.toxml('utf-8').decode('utf-8'))
-    f.close()
+
+    tspan_indices = {
+        'age': 5,
+        'repo': 37,
+        'contrib': 39,
+        'commit': 41,
+        'star': 43,
+        'follower': 45,
+        'loc_total': 47,
+        'loc_add': 48,
+        'loc_del': 49
+    }
+
+    tspan_elements = svg.getElementsByTagName('tspan')
+
+    tspan_elements[tspan_indices['age']].firstChild.data = age_data
+    tspan_elements[tspan_indices['repo']].firstChild.data = repo_data + ' '
+    tspan_elements[tspan_indices['contrib']].firstChild.data = contrib_data + ' '
+    tspan_elements[tspan_indices['commit']].firstChild.data = commit_data + '      '
+    tspan_elements[tspan_indices['star']].firstChild.data = star_data
+    tspan_elements[tspan_indices['follower']].firstChild.data = follower_data + '   '
+    tspan_elements[tspan_indices['loc_total']].firstChild.data = loc_data[2]
+    tspan_elements[tspan_indices['loc_add']].firstChild.data = loc_data[0] + '++'
+    tspan_elements[tspan_indices['loc_del']].firstChild.data = loc_data[1] + '--'
+
+    # Write back to the SVG file
+    with open(filename, mode='w', encoding='utf-8') as f:
+        f.write(svg.toxml('utf-8').decode('utf-8'))
 
 
 def commit_counter(comment_size):
@@ -376,6 +402,7 @@ def user_getter(username):
     variables = {'login': username}
     request = simple_request(user_getter.__name__, query, variables)
     return {'id': request.json()['data']['user']['id']}, request.json()['data']['user']['createdAt']
+
 
 def follower_getter(username):
     """
@@ -429,12 +456,10 @@ if __name__ == '__main__':
     Lorenzo Bandini (lorenzobandini), 2024-2025
     """
     print('Calculation times:')
-    # define global variable for owner ID and calculate user's creation date
-    # e.g {'id': 'MDQ6VXNlcjkwMzk2OTgx'} and 2019-11-03T21:15:07Z for username 'lorenzobandini'
     user_data, user_time = perf_counter(user_getter, USER_NAME)
     OWNER_ID, acc_date = user_data
     formatter('account data', user_time)
-    age_data, age_time = perf_counter(daily_readme, datetime.datetime(2002, 9, 22))
+    age_data, age_time = perf_counter(daily_readme, datetime.datetime(2007, 5, 8))
     formatter('age calculation', age_time)
     total_loc, loc_time = perf_counter(loc_query, ['OWNER', 'COLLABORATOR', 'ORGANIZATION_MEMBER'], 7)
     formatter('LOC (cached)', loc_time) if total_loc[-1] else formatter('LOC (no cache)', loc_time)
@@ -444,8 +469,7 @@ if __name__ == '__main__':
     contrib_data, contrib_time = perf_counter(graph_repos_stars, 'repos', ['OWNER', 'COLLABORATOR', 'ORGANIZATION_MEMBER'])
     follower_data, follower_time = perf_counter(follower_getter, USER_NAME)
 
-    # several repositories that I've contributed to have since been deleted.
-    if OWNER_ID == {'id': 'MDQ6VXNlcjkwMzk2OTgx'}: # only calculate for user lorenzobandini
+    if OWNER_ID == {'id': 'MDQ6VXNlcjkwMzk2OTgx'}:
         archived_data = add_archive()
         for index in range(len(total_loc)-1):
             total_loc[index] += archived_data[index]
@@ -463,7 +487,6 @@ if __name__ == '__main__':
     svg_overwrite('dark_mode.svg', age_data, commit_data, star_data, repo_data, contrib_data, follower_data, total_loc[:-1])
     svg_overwrite('light_mode.svg', age_data, commit_data, star_data, repo_data, contrib_data, follower_data, total_loc[:-1])
 
-    # move cursor to override 'Calculation times:' with 'Total function time:' and the total function time, then move cursor back
     print('\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F',
         '{:<21}'.format('Total function time:'), '{:>11}'.format('%.4f' % (user_time + age_time + loc_time + commit_time + star_time + repo_time + contrib_time)),
         ' s \033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E', sep='')
